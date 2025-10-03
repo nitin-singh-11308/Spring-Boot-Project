@@ -1,4 +1,4 @@
-package com.example.MSCafe.Model;
+package com.example.MSCafe.model;
 
 import com.example.MSCafe.enums.AccountStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;

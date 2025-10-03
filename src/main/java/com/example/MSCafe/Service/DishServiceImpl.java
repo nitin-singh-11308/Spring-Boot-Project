@@ -1,6 +1,6 @@
 package com.example.MSCafe.Service;
 
-import com.example.MSCafe.Model.Dish;
+import com.example.MSCafe.model.Dish;
 import com.example.MSCafe.Repository.DishRepository;
 import com.example.MSCafe.dto.request.DishRequestDto;
 import com.example.MSCafe.dto.response.DishResponseDto;

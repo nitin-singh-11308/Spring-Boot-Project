@@ -1,6 +1,6 @@
 package com.example.MSCafe.Repository;
 
-import com.example.MSCafe.Model.Chef;
+import com.example.MSCafe.model.Chef;
 import com.example.MSCafe.enums.Cuisine;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

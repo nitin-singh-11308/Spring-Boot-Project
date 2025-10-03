@@ -1,6 +1,6 @@
 package com.example.MSCafe.Repository;
 
-import com.example.MSCafe.Model.Dish;
+import com.example.MSCafe.model.Dish;
 import com.example.MSCafe.enums.DishCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

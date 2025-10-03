@@ -1,13 +1,12 @@
 package com.example.MSCafe.Controller;
 
-import com.example.MSCafe.Model.Dish;
 import com.example.MSCafe.Repository.DishRepository;
 import com.example.MSCafe.Service.DishService;
 import com.example.MSCafe.dto.request.DishRequestDto;
 import com.example.MSCafe.dto.response.DishResponseDto;
 import com.example.MSCafe.dto.response.GenericResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,9 +56,21 @@ public class DishController {
         return new ResponseEntity<>(dishService.searchDish(q,min, max), HttpStatusCode.valueOf(200));
     }
 
-    @GetMapping("/custom/jpql/{id}")
-    public ResponseEntity<Dish> TestMethod(@PathVariable Long id) {
-        return new ResponseEntity<>(dishRepository.getDishById(id), HttpStatus.OK);
+    @GetMapping("/page")
+    public ResponseEntity<Page<DishResponseDto>> getDishPage(
+            @RequestParam(defaultValue = "0") Integer pageIndex,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortByAttribute,
+            @RequestParam(defaultValue = "asc") String sortInOrder
+    ) {
+        return new ResponseEntity<>(
+                dishService.getDishPage(
+                        pageIndex,
+                        pageSize,
+                        sortByAttribute,
+                        sortInOrder
+                ),
+                HttpStatusCode.valueOf(200)
+        );
     }
-
 }

@@ -1,6 +1,6 @@
 package com.example.MSCafe.dto.response;
 
-import com.example.MSCafe.Model.Account;
+import com.example.MSCafe.model.Account;
 import com.example.MSCafe.enums.Cuisine;
 import lombok.Data;
 

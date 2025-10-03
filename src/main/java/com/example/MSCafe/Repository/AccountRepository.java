@@ -1,6 +1,6 @@
 package com.example.MSCafe.Repository;
 
-import com.example.MSCafe.Model.Account;
+import com.example.MSCafe.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

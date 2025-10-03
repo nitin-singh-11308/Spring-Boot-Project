@@ -1,7 +1,7 @@
 package com.example.MSCafe.Service;
 
-import com.example.MSCafe.Model.Account;
-import com.example.MSCafe.Model.Chef;
+import com.example.MSCafe.model.Account;
+import com.example.MSCafe.model.Chef;
 import com.example.MSCafe.Repository.AccountRepository;
 import com.example.MSCafe.Repository.ChefRepository;
 import com.example.MSCafe.dto.request.ChefRequestDto;
