@@ -8,6 +8,10 @@ import com.example.MSCafe.dto.request.ChefRequestDto;
 import com.example.MSCafe.dto.response.ChefResponseDto;
 import com.example.MSCafe.dto.response.GenericResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -115,5 +119,34 @@ public class ChefServiceImpl implements ChefService{
             genericResponseDto.setMessage("Chef id: " +id+" Not Found");
         }
         return genericResponseDto;
+    }
+
+    @Override
+    public Page<ChefResponseDto> getChefPage(Integer pageIndex, Integer pageSize, String sortByAttribute, String sortInOrder) {
+        Sort sort = (sortInOrder.equalsIgnoreCase("desc")) ? Sort.by(sortByAttribute).descending() : Sort.by(sortByAttribute).ascending();
+
+        Pageable pageable = PageRequest.of(pageIndex, pageSize, sort);
+
+        Page<Chef> chefPage = chefRepository.findAll(pageable);
+
+        Page<ChefResponseDto> chefResponseDtoPage = chefPage.map(chef -> mapChefToChefResponseDto(chef));
+
+        return chefResponseDtoPage;
+    }
+
+    // Helper methods
+
+    // Map Chef to ChefResponseDto
+    public ChefResponseDto mapChefToChefResponseDto(Chef chef) {
+        ChefResponseDto chefResponseDto = new ChefResponseDto();
+
+        chefResponseDto.setId(chef.getId());
+        chefResponseDto.setName(chef.getName());
+        chefResponseDto.setExperience(chef.getExperience());
+        chefResponseDto.setCuisine(chef.getCuisine());
+        chefResponseDto.setAccount(chef.getAccount());
+
+        return chefResponseDto;
+
     }
 }

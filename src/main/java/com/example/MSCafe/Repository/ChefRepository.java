@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChefRepository  extends JpaRepository<Chef, Long> {
+public interface ChefRepository extends JpaRepository<Chef, Long> {
 
-    //Experimental insertion (highly nor recommended)
+    //Experimental insertion (highly not recommended)
     @Modifying
     @Transactional
     @Query(value =  "INSERT INTO chef (name, experience, cuisine) VALUES (?1, ?2, ?3)", nativeQuery = true)
