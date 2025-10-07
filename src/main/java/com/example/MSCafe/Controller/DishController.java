@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dish")
+@RequestMapping("/api/dishes")
 public class DishController {
     @Autowired
     private DishService dishService;
