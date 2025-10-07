@@ -1,5 +1,6 @@
 package com.example.MSCafe.Service;
 
+import com.example.MSCafe.exception.ChefNotFoundException;
 import com.example.MSCafe.model.Account;
 import com.example.MSCafe.model.Chef;
 import com.example.MSCafe.Repository.AccountRepository;
@@ -54,7 +55,7 @@ public class ChefServiceImpl implements ChefService{
 
     @Override
     public ChefResponseDto getChef(Long id) {
-        Chef chef = chefRepository.findById(id).orElse(null);
+        Chef chef = chefRepository.findById(id).orElseThrow( () -> new ChefNotFoundException("Chef id: " +id+ " Doesn't exist") );
 
         ChefResponseDto chefResponseDto = new ChefResponseDto();
 
