@@ -1,5 +1,6 @@
 package com.example.MSCafe.Service;
 
+import com.example.MSCafe.exception.DishNotFoundException;
 import com.example.MSCafe.model.Dish;
 import com.example.MSCafe.Repository.DishRepository;
 import com.example.MSCafe.dto.request.DishRequestDto;
@@ -37,7 +38,10 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public DishResponseDto getDish(Long id) {
-        Dish dish = dishRepository.findById(id).orElse(null);
+        Dish dish = dishRepository.findById(id)
+                .orElseThrow(() ->
+                        new DishNotFoundException("Dish Id: " +id+ " Not Exist")
+                );
 
         return mapDishToDishResponseDto(dish);
     }
@@ -58,7 +62,9 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public DishResponseDto updateDish(Long id, DishRequestDto dishRequestDto) {
-        Dish dish = dishRepository.findById(id).orElse(null);
+        Dish dish = dishRepository.findById(id) .orElseThrow(() ->
+                new DishNotFoundException("Dish Id: " +id+ " Not Exist")
+        );
 
         dish = mapDishRequestDtoToDish(dish, dishRequestDto);
 
@@ -69,7 +75,9 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public GenericResponseDto removeDish(Long id) {
-        Dish dish = dishRepository.findById(id).orElse(null);
+        Dish dish = dishRepository.findById(id) .orElseThrow(() ->
+                new DishNotFoundException("Dish Id: " +id+ " Not Exist")
+        );
 
         GenericResponseDto genericResponseDto = new GenericResponseDto();
 
