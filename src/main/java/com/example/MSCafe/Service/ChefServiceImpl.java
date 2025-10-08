@@ -49,7 +49,10 @@ public class ChefServiceImpl implements ChefService{
 
     @Override
     public ChefResponseDto getChef(Long id) {
-        Chef chef = chefRepository.findById(id).orElseThrow( () -> new ChefNotFoundException("Chef id: " +id+ " Doesn't exist") );
+        Chef chef = chefRepository.findById(id)
+                        .orElseThrow( () ->
+                                new ChefNotFoundException("Chef id: " +id+ " Doesn't exist")
+                        );
 
         ChefResponseDto chefResponseDto = new ChefResponseDto();
 
@@ -75,7 +78,10 @@ public class ChefServiceImpl implements ChefService{
 
     @Override
     public ChefResponseDto updateChef(Long id, ChefRequestDto chefRequestDto) {
-        Chef chef = chefRepository.findById(id).orElse(null);
+        Chef chef = chefRepository.findById(id)
+                        .orElseThrow( () ->
+                                new ChefNotFoundException("Chef id: " +id+ " Doesn't exist")
+                        );
         chef.setName(chefRequestDto.getName());
         chef.setExperience(chefRequestDto.getExperience());
         chef.setCuisine(chefRequestDto.getCuisine());
@@ -87,7 +93,10 @@ public class ChefServiceImpl implements ChefService{
 
     @Override
     public GenericResponseDto removeChef(Long id) {
-        Chef chef = chefRepository.findById(id).orElse(null);
+        Chef chef = chefRepository.findById(id)
+                        .orElseThrow( () ->
+                                new ChefNotFoundException("Chef id: " +id+ " Doesn't exist")
+                        );
         GenericResponseDto genericResponseDto = new GenericResponseDto();
 
         if (chef != null ) {
