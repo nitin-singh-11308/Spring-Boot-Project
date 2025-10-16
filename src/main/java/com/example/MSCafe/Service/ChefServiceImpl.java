@@ -56,13 +56,8 @@ public class ChefServiceImpl implements ChefService{
 
         ChefResponseDto chefResponseDto = new ChefResponseDto();
 
-        chefResponseDto.setId(chef.getId());
-        chefResponseDto.setName(chef.getName());
-        chefResponseDto.setExperience(chef.getExperience());
-        chefResponseDto.setCuisine(chef.getCuisine());
-        chefResponseDto.setAccount(chef.getAccount());
+        return mapChefToChefResponseDto(chef);
 
-        return chefResponseDto;
     }
 
     @Override
