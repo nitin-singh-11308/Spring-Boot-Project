@@ -1,0 +1,31 @@
+package com.example.MSCafe.util;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.crypto.SecretKey;
+import java.util.Date;
+
+public class JwtUtil {
+    private final  String SECRET;
+    private final SecretKey KEY;
+    private final long AUTH_EXPIRATION;
+
+    public JwtUtil(@Value("${jwt.secret}") String jwtSecret) {
+        SECRET = jwtSecret;
+
+        KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
+
+        AUTH_EXPIRATION = 1000*60*5; // Valid For 5 Min
+    }
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .subject(username)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + AUTH_EXPIRATION))
+                .signWith(KEY, Jwts.SIG.HS256)
+                .compact();
+    }
+
+}
