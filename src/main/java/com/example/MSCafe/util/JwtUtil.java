@@ -1,12 +1,15 @@
 package com.example.MSCafe.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+@Component
 public class JwtUtil {
     private final  String SECRET;
     private final SecretKey KEY;
@@ -28,4 +31,17 @@ public class JwtUtil {
                 .compact();
     }
 
+    private Claims getClaims (String token) {
+        return Jwts.parser()
+                .verifyWith(KEY)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String extractUserName(String token) {
+        Claims body = getClaims(token);
+
+        return body.getSubject();
+    }
 }
