@@ -1,4 +1,9 @@
 package com.example.MSCafe.Service;
 
-public class UserService {
+import com.example.MSCafe.dto.request.UserRequestDto;
+import com.example.MSCafe.dto.response.UserResponseDto;
+
+public interface UserService {
+    UserResponseDto registerUser (UserRequestDto userRequestDto);
+    UserResponseDto getUserDetails(Long id);
 }
