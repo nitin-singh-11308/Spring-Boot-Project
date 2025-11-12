@@ -1,6 +1,7 @@
 package com.example.MSCafe.exception;
 
 import com.example.MSCafe.dto.response.GenericResponseDto;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,5 +30,14 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(genericResponseDto, HttpStatusCode.valueOf(404));
 
+    }
+
+    @ExceptionHandler(InvalidOtpException.class)
+    public ResponseEntity<GenericResponseDto> handleInvalidOtpException(InvalidOtpException e) {
+        GenericResponseDto genericResponseDto = new GenericResponseDto();
+        genericResponseDto.setSuccess(false);
+        genericResponseDto.setMessage(e.getMessage());
+
+        return new ResponseEntity<>(genericResponseDto, HttpStatusCode.valueOf(400));
     }
 }
