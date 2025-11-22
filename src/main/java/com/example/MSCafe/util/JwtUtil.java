@@ -45,6 +45,7 @@ public class JwtUtil {
     public String generateSignupToken(String email) {
         return Jwts.builder()
                 .subject(email)
+                .claim(PURPOSE_CLAIM, SIGNUP_PURPOSE)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + SIGNUP_EXPIRATION))
                 .signWith(KEY, Jwts.SIG.HS256)
@@ -61,7 +62,7 @@ public class JwtUtil {
     }
 
     // Auth/Signin/Login JWT logic here
-    public String generatAuthToken(String email) {
+    public String generateAuthToken(String email) {
         return Jwts.builder()
                 .subject(email)
                 .claim(PURPOSE_CLAIM,AUTH_PURPOSE)
